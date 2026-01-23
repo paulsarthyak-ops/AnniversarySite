@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You 💖</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Playfair Display', serif;
+    background: linear-gradient(-45deg, #ff9a9e, #fad0c4, #fbc2eb, #a18cd1);
+    background-size: 400% 400%;
+    animation: gradientBG 12s ease infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+  }
+
+  @keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(12px);
+    padding: 35px;
+    border-radius: 25px;
+    width: 90%;
+    max-width: 420px;
+    box-shadow: 0 0 30px rgba(255,0,100,0.3);
+    position: relative;
+    overflow: hidden;
+  }
+
+  button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 30px;
+    background: #ff5f9e;
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px rgba(255,95,158,0.7);
+  }
+
+  /* PAGE TRANSITIONS */
+  .page {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    transform: translateX(40px);
+    pointer-events: none;
+    transition: opacity 0.5s ease, transform 0.5s ease;
+  }
+
+  .page.active {
+    opacity: 1;
+    transform: translateX(0);
+    pointer-events: auto;
+    position: relative;
+  }
+
+  /* TYPEWRITER TEXT */
+  .typewriter {
+    min-height: 150px;
+    line-height: 1.6;
+    white-space: pre-wrap;
+  }
+
+  /* HEARTS */
+  .heart {
+    position: absolute;
+    font-size: 20px;
+    animation: float 6s linear infinite;
+    opacity: 0.8;
+  }
+
+  @keyframes float {
+    from { transform: translateY(0) scale(1); }
+    to { transform: translateY(-100vh) scale(1.8); opacity: 0; }
+  }
+</style>
+</head>
+
+<body>
+
+<div class="card">
+
+  <!-- HOME -->
+  <div id="home" class="page active">
+    <h1>Hi My Love 💕</h1>
+    <p>Choose a little piece of us 🌸</p>
+
+    <button onclick="navigate('letter')">For You 💌</button>
+    <button onclick="navigate('interactive')">Click Me 💖</button>
+  </div>
+
+  <!-- LETTER -->
+  <div id="letter" class="page">
+    <h2>For You 💖</h2>
+
+    <!-- YOUR PARAGRAPH -->
+    <p id="letterText" class="typewriter"></p>
+
+    <button onclick="navigate('home')">⬅ Back</button>
+  </div>
+
+  <!-- INTERACTIVE -->
+  <div id="interactive" class="page">
+    <h2 id="message">Tap the button 💖</h2>
+    <button onclick="changeMessage()">Again 💕</button>
+    <button onclick="navigate('home')">⬅ Back</button>
+  </div>
+
+</div>
+
+<script>
+  /* YOUR LETTER */
+  const letterContent = `
+Happy 10months anniversary my love, I know that maybe this is not the perfect gift right now and that maybe there are a few bugs here and there in this code, but I want to appreciate the love you have given me. I can never ever forget 24th of March 2025 as it remains in my heart. I love you Megh, over all our silly arguements. I love you forever and forever more.
+`;
+
+  let typingIndex = 0;
+  let typingInterval;
+
+  function typeLetter() {
+    clearInterval(typingInterval);
+    typingIndex = 0;
+    const target = document.getElementById("letterText");
+    target.innerText = "";
+
+    typingInterval = setInterval(() => {
+      if (typingIndex < letterContent.length) {
+        target.innerText += letterContent.charAt(typingIndex);
+        typingIndex++;
+      } else {
+        clearInterval(typingInterval);
+      }
+    }, 35);
+  }
+
+  function navigate(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    setTimeout(() => {
+      document.getElementById(pageId).classList.add('active');
+      if (pageId === "letter") typeLetter();
+    }, 50);
+  }
+
+  const messages = [
+    "You are my calm love",
+    "I feel safe with you 🌷",
+    "Every version of life is better with you ✨",
+    "I choose you, always 💖"
+  ];
+
+  let index = 0;
+  function changeMessage() {
+    document.getElementById("message").innerText = messages[index];
+    index = (index + 1) % messages.length;
+    createHeart();
+  }
+
+  function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.bottom = "0";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 6000);
+  }
+
+  setInterval(createHeart, 900);
+</script>
+
+</body>
+</html>
