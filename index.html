@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,38 +36,42 @@
 
     h1 {
         font-size: 4rem;
-        text-shadow: 0 0 15px rgba(255,255,255,0.7);
+        font-weight: 600;
+        letter-spacing: 1px;
+        text-shadow: 0 0 18px rgba(255,255,255,0.6);
     }
 
     .heart {
         font-size: 4.5rem;
         margin: 20px 0;
-        animation: heartbeat 1.5s infinite;
+        animation: heartbeat 1.6s infinite;
     }
 
     p {
         font-size: 1.2rem;
         margin-bottom: 25px;
+        opacity: 0.95;
     }
 
     button {
         font-size: 1.1rem;
-        padding: 12px 30px;
+        padding: 12px 32px;
         border: none;
         border-radius: 30px;
         cursor: pointer;
     }
 
     #yesBtn {
-        background: #ff4d6d;
+        background: linear-gradient(135deg, #ff4d6d, #ff758f);
         color: white;
-        box-shadow: 0 0 15px rgba(255,77,109,0.6);
+        box-shadow: 0 0 25px rgba(255,77,109,0.6);
         margin-right: 15px;
-        transition: transform 0.3s;
+        transition: transform 0.3s, box-shadow 0.3s;
     }
 
     #yesBtn:hover {
         transform: scale(1.1);
+        box-shadow: 0 0 35px rgba(255,77,109,0.8);
     }
 
     #noBtn {
@@ -112,23 +118,41 @@
         100% { transform: translateY(-110vh); opacity: 0; }
     }
 
-    /* MESSAGE BOX (Glassmorphism) */
+    /* ===== PREMIUM DARK GLASS MESSAGE BOX ===== */
     .message-box {
-        background: rgba(255, 255, 255, 0.2);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-radius: 25px;
-        padding: 35px 30px;
-        box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
-        max-width: 750px;
-        width: 90%;
-        animation: fadeIn 1.5s ease-in-out;
+        background: rgba(15, 15, 20, 0.55);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-radius: 28px;
+        padding: 45px 40px;
+        max-width: 780px;
+        width: 92%;
+
+        /* Layered shadows for depth */
+        box-shadow:
+            0 25px 60px rgba(0, 0, 0, 0.45),
+            inset 0 0 0 1px rgba(255, 255, 255, 0.08),
+            inset 0 0 25px rgba(255, 255, 255, 0.05);
+
+        animation: cardReveal 1.2s ease forwards;
+    }
+
+    @keyframes cardReveal {
+        from {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
     }
 
     .message-text {
-        font-size: 1.5rem;
-        line-height: 1.7;
-        color: white;
+        font-size: 1.55rem;
+        line-height: 1.75;
+        color: #f5f5f7;
+        letter-spacing: 0.2px;
     }
 
     /* Typewriter cursor */
@@ -136,7 +160,7 @@
         display: inline-block;
         width: 2px;
         height: 1.2em;
-        background: white;
+        background: rgba(255,255,255,0.8);
         margin-left: 6px;
         animation: blink 1s infinite;
     }
@@ -201,7 +225,7 @@ Hmm I didnt do anything tho but yay.
 I love you baby🌸❤️🫀`;
 
         let index = 0;
-        const speed = 35; // soft but fast typing
+        const speed = 35;
 
         function typeWriter() {
             if (index < text.length) {
