@@ -9,13 +9,6 @@
 <meta name="googlebot" content="noindex, nofollow">
 
 <style>
-:root{
-  --pink1:#ffafbd;
-  --pink2:#ffc3a0;
-  --dark1:#0f0f15;
-  --dark2:#1a1a24;
-}
-
 *{
   margin:0;
   padding:0;
@@ -25,19 +18,18 @@
 
 body{
   height:100vh;
-  background:linear-gradient(135deg,var(--pink1),var(--pink2));
+  background:linear-gradient(135deg,#ffafbd,#ffc3a0);
   display:flex;
   justify-content:center;
   align-items:center;
   overflow:hidden;
-  position:relative;
-  color:#fff;
+  color:white;
 }
 
-/* Vignette */
+/* vignette */
 body::after{
   content:"";
-  position:absolute;
+  position:fixed;
   inset:0;
   background:radial-gradient(circle,
     rgba(0,0,0,0) 45%,
@@ -57,22 +49,22 @@ h1{
 
 .heart{
   font-size:4.2rem;
-  margin:16px 0;
+  margin:14px 0;
   animation:heartbeat 1.6s infinite;
 }
 
 .question{
   font-size:1.2rem;
-  margin-bottom:10px;
+  margin-bottom:8px;
 }
 
-/* Reaction line */
+/* THIS IS WHERE YOUR TEXTS APPEAR */
 #reaction{
   font-size:1.05rem;
-  margin:14px 0 26px;
   min-height:1.4em;
-  opacity:0.9;
-  transition:opacity .3s;
+  margin-bottom:26px;
+  opacity:.95;
+  transition:opacity .25s;
 }
 
 button{
@@ -85,23 +77,19 @@ button{
 
 #yesBtn{
   background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:#fff;
+  color:white;
   box-shadow:0 0 26px rgba(255,77,109,.7);
   margin-right:14px;
-  transition:.3s;
-}
-
-#yesBtn:hover{
-  transform:scale(1.1);
 }
 
 #noBtn{
-  background:#fff;
+  background:white;
   color:#ff4d6d;
-  position:absolute;
+  position:fixed;   /* 🔑 CRITICAL FIX */
+  z-index:5;
 }
 
-/* Animations */
+/* animations */
 @keyframes heartbeat{
   0%,100%{transform:scale(1);}
   50%{transform:scale(1.12);}
@@ -115,9 +103,9 @@ button{
   to{transform:scale(1);opacity:1;}
 }
 
-/* Dark after YES */
+/* dark bg after yes */
 .dark-bg{
-  background:linear-gradient(135deg,var(--dark1),var(--dark2)) !important;
+  background:linear-gradient(135deg,#0f0f15,#1a1a24) !important;
 }
 </style>
 </head>
@@ -132,14 +120,16 @@ button{
   <div id="reaction"></div>
 
   <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-  <button id="noBtn">No 🙈</button>
 </div>
+
+<!-- NO BUTTON IS OUTSIDE CONTAINER ON PURPOSE -->
+<button id="noBtn">No 🙈</button>
 
 <script>
 const noBtn = document.getElementById("noBtn");
 const reaction = document.getElementById("reaction");
 
-/* Lines shown progressively */
+/* your lines */
 const lines = [
   "Think about this once baby",
   "I aint taking a no for an answer",
@@ -150,21 +140,32 @@ const lines = [
   "Gawd I am sad"
 ];
 
-let noCount = 0;
+let count = 0;
 
-/* Always teleport */
+/* initial placement of NO button */
+placeNo();
+
+function placeNo(){
+  const padding = 20;
+  const x = window.innerWidth/2 + 80;
+  const y = window.innerHeight/2 + 80;
+  noBtn.style.left = x + "px";
+  noBtn.style.top = y + "px";
+}
+
 function teleportNo(){
-  // show next line
-  if(noCount < lines.length){
-    reaction.textContent = lines[noCount];
-    noCount++;
-  } else {
-    reaction.textContent = lines[lines.length - 1];
-  }
+  // show next text
+  reaction.style.opacity = 0;
+  setTimeout(()=>{
+    reaction.textContent =
+      lines[Math.min(count, lines.length - 1)];
+    reaction.style.opacity = 1;
+    count++;
+  },120);
 
   // reset animation
   noBtn.style.animation = "none";
-  noBtn.offsetHeight; // force reflow
+  noBtn.offsetHeight;
 
   noBtn.style.animation = "teleportOut .25s";
 
@@ -183,7 +184,7 @@ function teleportNo(){
   },250);
 }
 
-/* Trigger on BOTH hover and click */
+/* ALWAYS trigger */
 noBtn.addEventListener("mouseenter", teleportNo);
 noBtn.addEventListener("click", teleportNo);
 
@@ -195,7 +196,8 @@ function yesClicked(){
       display:flex;
       justify-content:center;
       align-items:center;
-      padding:20px;">
+      padding:20px;
+      color:#f5f5f7;">
       <div style="
         background:rgba(15,15,20,.6);
         backdrop-filter:blur(22px);
@@ -204,10 +206,9 @@ function yesClicked(){
         max-width:800px;
         box-shadow:0 35px 80px rgba(0,0,0,.55),
                    inset 0 0 0 1px rgba(255,255,255,.08);
-        color:#f5f5f7;
         font-size:1.55rem;
         line-height:1.75;">
-        <p id="typeText"></p><span id="cursor">|</span>
+        <p id="typeText"></p><span>|</span>
       </div>
     </div>
   `;
@@ -220,14 +221,12 @@ Hmm I didnt do anything tho but yay.
 I love you baby🌸❤️🫀`;
 
   let i = 0;
-  const speed = 35;
-
   function type(){
     if(i < text.length){
       document.getElementById("typeText").innerHTML +=
         text[i] === "\n" ? "<br>" : text[i];
       i++;
-      setTimeout(type, speed);
+      setTimeout(type, 35);
     }
   }
   type();
