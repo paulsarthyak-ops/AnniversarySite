@@ -1,12 +1,10 @@
-    <!DOCTYPE html>
+      <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Megh 💖</title>
 
-<!-- Block search indexing -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
 
@@ -16,63 +14,40 @@
   --pink2:#ffc3a0;
   --dark1:#0f0f15;
   --dark2:#1a1a24;
-  --glass:rgba(15,15,20,0.6);
 }
 
 *{
   margin:0;
   padding:0;
   box-sizing:border-box;
-  font-family:"Poppins",system-ui,sans-serif;
-}
-
-html,body{
-  height:100%;
-  overflow:hidden;
+  font-family:"Poppins",sans-serif;
 }
 
 body{
+  height:100vh;
   background:linear-gradient(135deg,var(--pink1),var(--pink2));
   display:flex;
   justify-content:center;
   align-items:center;
+  overflow:hidden;
   position:relative;
   color:#fff;
 }
 
-/* ===== Cinematic vignette ===== */
+/* Vignette */
 body::after{
   content:"";
   position:absolute;
   inset:0;
-  background:radial-gradient(circle at center,
-    rgba(0,0,0,0) 40%,
-    rgba(0,0,0,0.45) 100%);
+  background:radial-gradient(circle,
+    rgba(0,0,0,0) 45%,
+    rgba(0,0,0,.45) 100%);
   pointer-events:none;
-  z-index:1;
 }
 
-/* ===== Film grain overlay ===== */
-body::before{
-  content:"";
-  position:absolute;
-  inset:-50%;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
-  animation:grain 8s steps(10) infinite;
-  pointer-events:none;
-  z-index:2;
-}
-
-@keyframes grain{
-  0%{transform:translate(0,0);}
-  100%{transform:translate(-10%,10%);}
-}
-
-/* ===== Main container ===== */
 .container{
   text-align:center;
-  z-index:3;
-  animation:fadeIn 1.8s ease;
+  z-index:2;
 }
 
 h1{
@@ -81,17 +56,25 @@ h1{
 }
 
 .heart{
-  font-size:4.5rem;
-  margin:18px 0;
+  font-size:4.2rem;
+  margin:16px 0;
   animation:heartbeat 1.6s infinite;
 }
 
-p{
-  font-size:1.15rem;
-  margin-bottom:26px;
+.question{
+  font-size:1.2rem;
+  margin-bottom:10px;
 }
 
-/* ===== Buttons ===== */
+/* Reaction line */
+#reaction{
+  font-size:1.05rem;
+  margin:14px 0 26px;
+  min-height:1.4em;
+  opacity:0.9;
+  transition:opacity .3s;
+}
+
 button{
   font-size:1.1rem;
   padding:12px 34px;
@@ -103,7 +86,7 @@ button{
 #yesBtn{
   background:linear-gradient(135deg,#ff4d6d,#ff758f);
   color:#fff;
-  box-shadow:0 0 28px rgba(255,77,109,.7);
+  box-shadow:0 0 26px rgba(255,77,109,.7);
   margin-right:14px;
   transition:.3s;
 }
@@ -118,7 +101,12 @@ button{
   position:absolute;
 }
 
-/* ===== Teleport ===== */
+/* Animations */
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+
 @keyframes teleportOut{
   to{transform:scale(.2);opacity:0;}
 }
@@ -127,80 +115,9 @@ button{
   to{transform:scale(1);opacity:1;}
 }
 
-/* ===== Animations ===== */
-@keyframes fadeIn{
-  from{opacity:0;transform:translateY(20px);}
-  to{opacity:1;}
-}
-
-@keyframes heartbeat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.12);}
-}
-
-/* ===== Floating hearts ===== */
-.floating-heart{
-  position:absolute;
-  bottom:-20px;
-  font-size:20px;
-  color:rgba(255,255,255,.6);
-  animation:floatUp linear infinite;
-}
-
-@keyframes floatUp{
-  0%{transform:translateY(0);opacity:0;}
-  10%{opacity:1;}
-  100%{transform:translateY(-110vh);opacity:0;}
-}
-
-/* ===== Glass message card ===== */
-.message-box{
-  background:var(--glass);
-  backdrop-filter:blur(22px);
-  border-radius:30px;
-  padding:44px 40px;
-  max-width:820px;
-  width:92%;
-  box-shadow:
-    0 35px 80px rgba(0,0,0,.55),
-    inset 0 0 0 1px rgba(255,255,255,.08),
-    inset 0 0 30px rgba(255,255,255,.05);
-  animation:cardReveal 1.2s ease forwards;
-}
-
-@keyframes cardReveal{
-  from{opacity:0;transform:scale(.96) translateY(18px);}
-  to{opacity:1;transform:scale(1);}
-}
-
-.message-text{
-  font-size:1.55rem;
-  line-height:1.75;
-  color:#f5f5f7;
-}
-
-/* ===== Typewriter cursor ===== */
-.cursor{
-  display:inline-block;
-  width:2px;
-  height:1.2em;
-  background:#fff;
-  margin-left:6px;
-  animation:blink 1s infinite;
-}
-
-@keyframes blink{
-  50%{opacity:0;}
-}
-
-/* ===== Darken after YES ===== */
+/* Dark after YES */
 .dark-bg{
   background:linear-gradient(135deg,var(--dark1),var(--dark2)) !important;
-}
-
-/* ===== Reduce motion respect ===== */
-@media (prefers-reduced-motion:reduce){
-  *{animation:none !important;transition:none !important;}
 }
 </style>
 </head>
@@ -210,84 +127,112 @@ button{
 <div class="container">
   <h1>Megh 💕</h1>
   <div class="heart">❤️</div>
-  <p>Will you be my Valentine?</p>
+
+  <div class="question">Will you be my Valentine?</div>
+  <div id="reaction"></div>
+
   <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-  <button id="noBtn" onmouseover="teleportNo()">No 🙈</button>
+  <button id="noBtn">No 🙈</button>
 </div>
 
 <script>
-/* ===== Orientation lock (best effort) ===== */
-if (screen.orientation && screen.orientation.lock) {
-  try { screen.orientation.lock("portrait"); } catch(e){}
-}
+const noBtn = document.getElementById("noBtn");
+const reaction = document.getElementById("reaction");
 
-const noBtn=document.getElementById("noBtn");
+/* Lines shown progressively */
+const lines = [
+  "Think about this once baby",
+  "I aint taking a no for an answer",
+  "Please baby please click yes",
+  "Gawd I know you want to desperately click no but please click yes",
+  "CLICK YES",
+  "YES BABY THERE IS A BUTTON NAMED YES, JUST CLICK IT",
+  "Gawd I am sad"
+];
 
-/* ===== Teleport logic ===== */
+let noCount = 0;
+
+/* Always teleport */
 function teleportNo(){
-  noBtn.style.animation="teleportOut .35s";
+  // show next line
+  if(noCount < lines.length){
+    reaction.textContent = lines[noCount];
+    noCount++;
+  } else {
+    reaction.textContent = lines[lines.length - 1];
+  }
+
+  // reset animation
+  noBtn.style.animation = "none";
+  noBtn.offsetHeight; // force reflow
+
+  noBtn.style.animation = "teleportOut .25s";
+
   setTimeout(()=>{
-    noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth)+"px";
-    noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight)+"px";
-    noBtn.style.animation="teleportIn .35s";
-  },350);
+    const padding = 20;
+    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
+    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
+
+    const x = Math.random() * maxX;
+    const y = Math.random() * maxY;
+
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+
+    noBtn.style.animation = "teleportIn .25s";
+  },250);
 }
 
-/* ===== YES click ===== */
+/* Trigger on BOTH hover and click */
+noBtn.addEventListener("mouseenter", teleportNo);
+noBtn.addEventListener("click", teleportNo);
+
 function yesClicked(){
   document.body.classList.add("dark-bg");
-
-  document.body.innerHTML=`
+  document.body.innerHTML = `
     <div style="
       height:100vh;
       display:flex;
       justify-content:center;
       align-items:center;
-      padding:env(safe-area-inset-top)
-              env(safe-area-inset-right)
-              env(safe-area-inset-bottom)
-              env(safe-area-inset-left);
-      z-index:3;">
-      <div class="message-box" id="box">
-        <p id="typeText" class="message-text"></p>
-        <span class="cursor"></span>
+      padding:20px;">
+      <div style="
+        background:rgba(15,15,20,.6);
+        backdrop-filter:blur(22px);
+        border-radius:28px;
+        padding:44px 40px;
+        max-width:800px;
+        box-shadow:0 35px 80px rgba(0,0,0,.55),
+                   inset 0 0 0 1px rgba(255,255,255,.08);
+        color:#f5f5f7;
+        font-size:1.55rem;
+        line-height:1.75;">
+        <p id="typeText"></p><span id="cursor">|</span>
       </div>
-    </div>`;
+    </div>
+  `;
 
-  const text=
+  const text =
 `Then you do wish to be my valentines huh?
 Guess you couldnt click no.
 Hmm I didnt do anything tho but yay.
 
 I love you baby🌸❤️🫀`;
 
-  let i=0;
-  const speed=35;
+  let i = 0;
+  const speed = 35;
 
   function type(){
-    if(i<text.length){
-      const el=document.getElementById("typeText");
-      el.innerHTML+=text[i]==="\n"?"<br>":text[i];
-      el.scrollIntoView({behavior:"smooth",block:"center"});
+    if(i < text.length){
+      document.getElementById("typeText").innerHTML +=
+        text[i] === "\n" ? "<br>" : text[i];
       i++;
-      setTimeout(type,speed);
+      setTimeout(type, speed);
     }
   }
   type();
 }
-
-/* ===== Floating hearts ===== */
-function createHeart(){
-  const h=document.createElement("div");
-  h.className="floating-heart";
-  h.innerHTML="❤";
-  h.style.left=Math.random()*100+"vw";
-  h.style.animationDuration=4+Math.random()*4+"s";
-  document.body.appendChild(h);
-  setTimeout(()=>h.remove(),8000);
-}
-setInterval(createHeart,420);
 </script>
 
 </body>
-</html>    
+</html>
