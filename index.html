@@ -1,8 +1,12 @@
-            <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>For Megh 💖</title>
+
+<!-- Prevent search engines from indexing -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
 
 <style>
     * {
@@ -108,13 +112,32 @@
         100% { transform: translateY(-110vh); opacity: 0; }
     }
 
+    /* MESSAGE BOX (Glassmorphism) */
+    .message-box {
+        background: rgba(255, 255, 255, 0.2);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border-radius: 25px;
+        padding: 35px 30px;
+        box-shadow: 0 0 40px rgba(255, 255, 255, 0.25);
+        max-width: 750px;
+        width: 90%;
+        animation: fadeIn 1.5s ease-in-out;
+    }
+
+    .message-text {
+        font-size: 1.5rem;
+        line-height: 1.7;
+        color: white;
+    }
+
     /* Typewriter cursor */
     .cursor {
         display: inline-block;
         width: 2px;
         height: 1.2em;
         background: white;
-        margin-left: 5px;
+        margin-left: 6px;
         animation: blink 1s infinite;
     }
 
@@ -161,18 +184,16 @@
                 justify-content:center;
                 align-items:center;
                 background:linear-gradient(135deg,#ffafbd,#ffc3a0);
-                color:white;
-                text-align:center;
                 padding:20px;
             ">
-                <div style="max-width:750px;">
-                    <p id="typeText" style="font-size:1.5rem; line-height:1.7;"></p>
+                <div class="message-box">
+                    <p id="typeText" class="message-text"></p>
                     <span class="cursor"></span>
                 </div>
             </div>
         `;
 
-        const text = 
+        const text =
 `Then you do wish to be my valentines huh?
 Guess you couldnt click no.
 Hmm I didnt do anything tho but yay.
@@ -180,12 +201,12 @@ Hmm I didnt do anything tho but yay.
 I love you baby🌸❤️🫀`;
 
         let index = 0;
-        const speed = 35; // fast but soft typing speed
+        const speed = 35; // soft but fast typing
 
         function typeWriter() {
             if (index < text.length) {
-                document.getElementById("typeText").innerHTML += 
-                    text[index] === "\n" ? "<br>" : text[index];
+                document.getElementById("typeText").innerHTML +=
+                    text[index] === "\\n" ? "<br>" : text[index];
                 index++;
                 setTimeout(typeWriter, speed);
             }
