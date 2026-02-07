@@ -1,236 +1,192 @@
-      <!DOCTYPE html>
+        <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>For Megh 💖</title>
 
-<meta name="robots" content="noindex, nofollow">
-<meta name="googlebot" content="noindex, nofollow">
-
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:"Poppins",sans-serif;
-}
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
 
-body{
-  height:100vh;
-  background:linear-gradient(135deg,#ffafbd,#ffc3a0);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  overflow:hidden;
-  color:white;
-}
+    body {
+        height: 100vh;
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
 
-/* vignette */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  background:radial-gradient(circle,
-    rgba(0,0,0,0) 45%,
-    rgba(0,0,0,.45) 100%);
-  pointer-events:none;
-}
+    .container {
+        text-align: center;
+        color: white;
+        z-index: 2;
+        animation: fadeIn 2s ease-in-out;
+    }
 
-.container{
-  text-align:center;
-  z-index:2;
-}
+    h1 {
+        font-size: 4rem;
+        text-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
 
-h1{
-  font-size:3.8rem;
-  text-shadow:0 0 18px rgba(255,255,255,.6);
-}
+    .heart {
+        font-size: 4.5rem;
+        margin: 20px 0;
+        animation: heartbeat 1.5s infinite;
+    }
 
-.heart{
-  font-size:4.2rem;
-  margin:14px 0;
-  animation:heartbeat 1.6s infinite;
-}
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
 
-.question{
-  font-size:1.2rem;
-  margin-bottom:8px;
-}
+    button {
+        font-size: 1.1rem;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
 
-/* THIS IS WHERE YOUR TEXTS APPEAR */
-#reaction{
-  font-size:1.05rem;
-  min-height:1.4em;
-  margin-bottom:26px;
-  opacity:.95;
-  transition:opacity .25s;
-}
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 0 15px rgba(255,77,109,0.6);
+        margin-right: 15px;
+        transition: transform 0.3s;
+    }
 
-button{
-  font-size:1.1rem;
-  padding:12px 34px;
-  border:none;
-  border-radius:32px;
-  cursor:pointer;
-}
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
 
-#yesBtn{
-  background:linear-gradient(135deg,#ff4d6d,#ff758f);
-  color:white;
-  box-shadow:0 0 26px rgba(255,77,109,.7);
-  margin-right:14px;
-}
+    #noBtn {
+        background: white;
+        color: #ff4d6d;
+        position: absolute;
+        animation-duration: 0.35s;
+        animation-fill-mode: forwards;
+    }
 
-#noBtn{
-  background:white;
-  color:#ff4d6d;
-  position:fixed;   /* 🔑 CRITICAL FIX */
-  z-index:5;
-}
+    /* TELEPORT ANIMATIONS */
+    @keyframes teleportOut {
+        from {
+            transform: scale(1);
+            opacity: 1;
+        }
+        to {
+            transform: scale(0.2);
+            opacity: 0;
+        }
+    }
 
-/* animations */
-@keyframes heartbeat{
-  0%,100%{transform:scale(1);}
-  50%{transform:scale(1.12);}
-}
+    @keyframes teleportIn {
+        from {
+            transform: scale(0.2);
+            opacity: 0;
+        }
+        to {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
 
-@keyframes teleportOut{
-  to{transform:scale(.2);opacity:0;}
-}
-@keyframes teleportIn{
-  from{transform:scale(.2);opacity:0;}
-  to{transform:scale(1);opacity:1;}
-}
+    /* Floating hearts */
+    .floating-heart {
+        position: absolute;
+        bottom: -20px;
+        color: rgba(255,255,255,0.7);
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+    }
 
-/* dark bg after yes */
-.dark-bg{
-  background:linear-gradient(135deg,#0f0f15,#1a1a24) !important;
-}
+    @keyframes heartbeat {
+        0%, 50%, 100% { transform: scale(1); }
+        25%, 75% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
 </style>
 </head>
 
 <body>
 
 <div class="container">
-  <h1>Megh 💕</h1>
-  <div class="heart">❤️</div>
+    <h1>Megh 💕</h1>
+    <div class="heart">❤️</div>
+    <p>Will you be my Valentine?</p>
 
-  <div class="question">Will you be my Valentine?</div>
-  <div id="reaction"></div>
-
-  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="teleportNo()" onclick="teleportNo()">No 🙈</button>
 </div>
 
-<!-- NO BUTTON IS OUTSIDE CONTAINER ON PURPOSE -->
-<button id="noBtn">No 🙈</button>
-
 <script>
-const noBtn = document.getElementById("noBtn");
-const reaction = document.getElementById("reaction");
+    const noBtn = document.getElementById("noBtn");
 
-/* your lines */
-const lines = [
-  "Think about this once baby",
-  "I aint taking a no for an answer",
-  "Please baby please click yes",
-  "Gawd I know you want to desperately click no but please click yes",
-  "CLICK YES",
-  "YES BABY THERE IS A BUTTON NAMED YES, JUST CLICK IT",
-  "Gawd I am sad"
-];
+    function teleportNo() {
+        noBtn.style.animationName = "teleportOut";
 
-let count = 0;
+        setTimeout(() => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
 
-/* initial placement of NO button */
-placeNo();
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
 
-function placeNo(){
-  const padding = 20;
-  const x = window.innerWidth/2 + 80;
-  const y = window.innerHeight/2 + 80;
-  noBtn.style.left = x + "px";
-  noBtn.style.top = y + "px";
-}
-
-function teleportNo(){
-  // show next text
-  reaction.style.opacity = 0;
-  setTimeout(()=>{
-    reaction.textContent =
-      lines[Math.min(count, lines.length - 1)];
-    reaction.style.opacity = 1;
-    count++;
-  },120);
-
-  // reset animation
-  noBtn.style.animation = "none";
-  noBtn.offsetHeight;
-
-  noBtn.style.animation = "teleportOut .25s";
-
-  setTimeout(()=>{
-    const padding = 20;
-    const maxX = window.innerWidth - noBtn.offsetWidth - padding;
-    const maxY = window.innerHeight - noBtn.offsetHeight - padding;
-
-    const x = Math.random() * maxX;
-    const y = Math.random() * maxY;
-
-    noBtn.style.left = x + "px";
-    noBtn.style.top = y + "px";
-
-    noBtn.style.animation = "teleportIn .25s";
-  },250);
-}
-
-/* ALWAYS trigger */
-noBtn.addEventListener("mouseenter", teleportNo);
-noBtn.addEventListener("click", teleportNo);
-
-function yesClicked(){
-  document.body.classList.add("dark-bg");
-  document.body.innerHTML = `
-    <div style="
-      height:100vh;
-      display:flex;
-      justify-content:center;
-      align-items:center;
-      padding:20px;
-      color:#f5f5f7;">
-      <div style="
-        background:rgba(15,15,20,.6);
-        backdrop-filter:blur(22px);
-        border-radius:28px;
-        padding:44px 40px;
-        max-width:800px;
-        box-shadow:0 35px 80px rgba(0,0,0,.55),
-                   inset 0 0 0 1px rgba(255,255,255,.08);
-        font-size:1.55rem;
-        line-height:1.75;">
-        <p id="typeText"></p><span>|</span>
-      </div>
-    </div>
-  `;
-
-  const text =
-`Then you do wish to be my valentines huh?
-Guess you couldnt click no.
-Hmm I didnt do anything tho but yay.
-
-I love you baby🌸❤️🫀`;
-
-  let i = 0;
-  function type(){
-    if(i < text.length){
-      document.getElementById("typeText").innerHTML +=
-        text[i] === "\n" ? "<br>" : text[i];
-      i++;
-      setTimeout(type, 35);
+            noBtn.style.animationName = "teleportIn";
+        }, 350);
     }
-  }
-  type();
-}
+
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                background:linear-gradient(135deg,#ffafbd,#ffc3a0);
+                color:white;
+                text-align:center;
+                font-family:Poppins,sans-serif;
+                padding:20px;
+            ">
+                <div style="max-width:700px;">
+                    <p style="font-size:1.5rem; line-height:1.7;">
+                        Then you do wish to be my valentines huh?<br>
+                        Guess you couldnt click no.<br>
+                        Hmm I didnt do anything tho but yay.<br><br>
+                        <strong>I love you baby🌸❤️🫀</strong>
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 400);
 </script>
 
 </body>
