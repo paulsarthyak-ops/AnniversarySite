@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Megh 💖</title>
+
+<!-- Prevent search engines from indexing -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
+
+    body {
+        height: 100vh;
+        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+    }
+
+    .container {
+        text-align: center;
+        color: white;
+        animation: fadeIn 2s ease-in-out;
+        z-index: 2;
+    }
+
+    h1 {
+        font-size: 4rem;
+        text-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
+
+    .heart {
+        font-size: 4.5rem;
+        margin: 20px 0;
+        animation: heartbeat 1.5s infinite;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 25px;
+    }
+
+    button {
+        font-size: 1.1rem;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 30px;
+        cursor: pointer;
+    }
+
+    #yesBtn {
+        background: #ff4d6d;
+        color: white;
+        box-shadow: 0 0 15px rgba(255,77,109,0.6);
+        margin-right: 15px;
+        transition: transform 0.3s;
+    }
+
+    #yesBtn:hover {
+        transform: scale(1.1);
+    }
+
+    #noBtn {
+        background: white;
+        color: #ff4d6d;
+        position: absolute;
+        animation-duration: 0.35s;
+        animation-fill-mode: forwards;
+    }
+
+    /* Teleport animations */
+    @keyframes teleportOut {
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(0.2); opacity: 0; }
+    }
+
+    @keyframes teleportIn {
+        from { transform: scale(0.2); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Floating hearts */
+    .floating-heart {
+        position: absolute;
+        bottom: -20px;
+        color: rgba(255,255,255,0.7);
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+    }
+
+    @keyframes heartbeat {
+        0%, 50%, 100% { transform: scale(1); }
+        25%, 75% { transform: scale(1.1); }
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0); opacity: 0; }
+        10% { opacity: 1; }
+        100% { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* Typewriter cursor */
+    .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.2em;
+        background: white;
+        margin-left: 6px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Megh 💕</h1>
+    <div class="heart">❤️</div>
+    <p>Will you be my Valentine?</p>
+
+    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+    <button id="noBtn" onmouseover="teleportNo()" onclick="teleportNo()">No 🙈</button>
+</div>
+
+<script>
+    const noBtn = document.getElementById("noBtn");
+
+    function teleportNo() {
+        noBtn.style.animationName = "teleportOut";
+
+        setTimeout(() => {
+            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
+            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+
+            noBtn.style.left = x + "px";
+            noBtn.style.top = y + "px";
+
+            noBtn.style.animationName = "teleportIn";
+        }, 350);
+    }
+
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                background:linear-gradient(135deg,#ffafbd,#ffc3a0);
+                color:white;
+                text-align:center;
+                padding:20px;
+            ">
+                <div style="max-width:750px;">
+                    <p id="typeText" style="font-size:1.5rem; line-height:1.7;"></p>
+                    <span class="cursor"></span>
+                </div>
+            </div>
+        `;
+
+        const text =
+`Then you do wish to be my valentines huh?
+Guess you couldnt click no.
+Hmm I didnt do anything tho but yay.
+
+I love you baby🌸❤️🫀`;
+
+        let index = 0;
+        const speed = 35; // soft but fast typing
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typeText").innerHTML +=
+                    text[index] === "\\n" ? "<br>" : text[index];
+                index++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        typeWriter();
+    }
+
+    function createHeart() {
+        const heart = document.createElement("div");
+        heart.classList.add("floating-heart");
+        heart.innerHTML = "❤";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
+        document.body.appendChild(heart);
+
+        setTimeout(() => heart.remove(), 8000);
+    }
+
+    setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
