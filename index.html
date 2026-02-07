@@ -1,4 +1,4 @@
-        <!DOCTYPE html>
+            <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -24,8 +24,8 @@
     .container {
         text-align: center;
         color: white;
-        z-index: 2;
         animation: fadeIn 2s ease-in-out;
+        z-index: 2;
     }
 
     h1 {
@@ -72,27 +72,15 @@
         animation-fill-mode: forwards;
     }
 
-    /* TELEPORT ANIMATIONS */
+    /* Teleport animations */
     @keyframes teleportOut {
-        from {
-            transform: scale(1);
-            opacity: 1;
-        }
-        to {
-            transform: scale(0.2);
-            opacity: 0;
-        }
+        from { transform: scale(1); opacity: 1; }
+        to { transform: scale(0.2); opacity: 0; }
     }
 
     @keyframes teleportIn {
-        from {
-            transform: scale(0.2);
-            opacity: 0;
-        }
-        to {
-            transform: scale(1);
-            opacity: 1;
-        }
+        from { transform: scale(0.2); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
     }
 
     /* Floating hearts */
@@ -118,6 +106,21 @@
         0% { transform: translateY(0); opacity: 0; }
         10% { opacity: 1; }
         100% { transform: translateY(-110vh); opacity: 0; }
+    }
+
+    /* Typewriter cursor */
+    .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.2em;
+        background: white;
+        margin-left: 5px;
+        animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+        0%, 50%, 100% { opacity: 1; }
+        25%, 75% { opacity: 0; }
     }
 </style>
 </head>
@@ -160,19 +163,35 @@
                 background:linear-gradient(135deg,#ffafbd,#ffc3a0);
                 color:white;
                 text-align:center;
-                font-family:Poppins,sans-serif;
                 padding:20px;
             ">
-                <div style="max-width:700px;">
-                    <p style="font-size:1.5rem; line-height:1.7;">
-                        Then you do wish to be my valentines huh?<br>
-                        Guess you couldnt click no.<br>
-                        Hmm I didnt do anything tho but yay.<br><br>
-                        <strong>I love you baby🌸❤️🫀</strong>
-                    </p>
+                <div style="max-width:750px;">
+                    <p id="typeText" style="font-size:1.5rem; line-height:1.7;"></p>
+                    <span class="cursor"></span>
                 </div>
             </div>
         `;
+
+        const text = 
+`Then you do wish to be my valentines huh?
+Guess you couldnt click no.
+Hmm I didnt do anything tho but yay.
+
+I love you baby🌸❤️🫀`;
+
+        let index = 0;
+        const speed = 35; // fast but soft typing speed
+
+        function typeWriter() {
+            if (index < text.length) {
+                document.getElementById("typeText").innerHTML += 
+                    text[index] === "\n" ? "<br>" : text[index];
+                index++;
+                setTimeout(typeWriter, speed);
+            }
+        }
+
+        typeWriter();
     }
 
     function createHeart() {
