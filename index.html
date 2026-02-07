@@ -1,216 +1,293 @@
-<!DOCTYPE html>
+    <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>For Megh 💖</title>
 
-<!-- Prevent search engines from indexing -->
+<!-- Block search indexing -->
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
 
 <style>
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-        font-family: "Poppins", sans-serif;
-    }
+:root{
+  --pink1:#ffafbd;
+  --pink2:#ffc3a0;
+  --dark1:#0f0f15;
+  --dark2:#1a1a24;
+  --glass:rgba(15,15,20,0.6);
+}
 
-    body {
-        height: 100vh;
-        background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:"Poppins",system-ui,sans-serif;
+}
 
-    .container {
-        text-align: center;
-        color: white;
-        animation: fadeIn 2s ease-in-out;
-        z-index: 2;
-    }
+html,body{
+  height:100%;
+  overflow:hidden;
+}
 
-    h1 {
-        font-size: 4rem;
-        text-shadow: 0 0 15px rgba(255,255,255,0.7);
-    }
+body{
+  background:linear-gradient(135deg,var(--pink1),var(--pink2));
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  position:relative;
+  color:#fff;
+}
 
-    .heart {
-        font-size: 4.5rem;
-        margin: 20px 0;
-        animation: heartbeat 1.5s infinite;
-    }
+/* ===== Cinematic vignette ===== */
+body::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:radial-gradient(circle at center,
+    rgba(0,0,0,0) 40%,
+    rgba(0,0,0,0.45) 100%);
+  pointer-events:none;
+  z-index:1;
+}
 
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 25px;
-    }
+/* ===== Film grain overlay ===== */
+body::before{
+  content:"";
+  position:absolute;
+  inset:-50%;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.035'/%3E%3C/svg%3E");
+  animation:grain 8s steps(10) infinite;
+  pointer-events:none;
+  z-index:2;
+}
 
-    button {
-        font-size: 1.1rem;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 30px;
-        cursor: pointer;
-    }
+@keyframes grain{
+  0%{transform:translate(0,0);}
+  100%{transform:translate(-10%,10%);}
+}
 
-    #yesBtn {
-        background: #ff4d6d;
-        color: white;
-        box-shadow: 0 0 15px rgba(255,77,109,0.6);
-        margin-right: 15px;
-        transition: transform 0.3s;
-    }
+/* ===== Main container ===== */
+.container{
+  text-align:center;
+  z-index:3;
+  animation:fadeIn 1.8s ease;
+}
 
-    #yesBtn:hover {
-        transform: scale(1.1);
-    }
+h1{
+  font-size:3.8rem;
+  text-shadow:0 0 18px rgba(255,255,255,.6);
+}
 
-    #noBtn {
-        background: white;
-        color: #ff4d6d;
-        position: absolute;
-        animation-duration: 0.35s;
-        animation-fill-mode: forwards;
-    }
+.heart{
+  font-size:4.5rem;
+  margin:18px 0;
+  animation:heartbeat 1.6s infinite;
+}
 
-    /* Teleport animations */
-    @keyframes teleportOut {
-        from { transform: scale(1); opacity: 1; }
-        to { transform: scale(0.2); opacity: 0; }
-    }
+p{
+  font-size:1.15rem;
+  margin-bottom:26px;
+}
 
-    @keyframes teleportIn {
-        from { transform: scale(0.2); opacity: 0; }
-        to { transform: scale(1); opacity: 1; }
-    }
+/* ===== Buttons ===== */
+button{
+  font-size:1.1rem;
+  padding:12px 34px;
+  border:none;
+  border-radius:32px;
+  cursor:pointer;
+}
 
-    /* Floating hearts */
-    .floating-heart {
-        position: absolute;
-        bottom: -20px;
-        color: rgba(255,255,255,0.7);
-        font-size: 20px;
-        animation: floatUp 6s linear infinite;
-    }
+#yesBtn{
+  background:linear-gradient(135deg,#ff4d6d,#ff758f);
+  color:#fff;
+  box-shadow:0 0 28px rgba(255,77,109,.7);
+  margin-right:14px;
+  transition:.3s;
+}
 
-    @keyframes heartbeat {
-        0%, 50%, 100% { transform: scale(1); }
-        25%, 75% { transform: scale(1.1); }
-    }
+#yesBtn:hover{
+  transform:scale(1.1);
+}
 
-    @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(20px); }
-        to { opacity: 1; transform: translateY(0); }
-    }
+#noBtn{
+  background:#fff;
+  color:#ff4d6d;
+  position:absolute;
+}
 
-    @keyframes floatUp {
-        0% { transform: translateY(0); opacity: 0; }
-        10% { opacity: 1; }
-        100% { transform: translateY(-110vh); opacity: 0; }
-    }
+/* ===== Teleport ===== */
+@keyframes teleportOut{
+  to{transform:scale(.2);opacity:0;}
+}
+@keyframes teleportIn{
+  from{transform:scale(.2);opacity:0;}
+  to{transform:scale(1);opacity:1;}
+}
 
-    /* Typewriter cursor */
-    .cursor {
-        display: inline-block;
-        width: 2px;
-        height: 1.2em;
-        background: white;
-        margin-left: 6px;
-        animation: blink 1s infinite;
-    }
+/* ===== Animations ===== */
+@keyframes fadeIn{
+  from{opacity:0;transform:translateY(20px);}
+  to{opacity:1;}
+}
 
-    @keyframes blink {
-        0%, 50%, 100% { opacity: 1; }
-        25%, 75% { opacity: 0; }
-    }
+@keyframes heartbeat{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+
+/* ===== Floating hearts ===== */
+.floating-heart{
+  position:absolute;
+  bottom:-20px;
+  font-size:20px;
+  color:rgba(255,255,255,.6);
+  animation:floatUp linear infinite;
+}
+
+@keyframes floatUp{
+  0%{transform:translateY(0);opacity:0;}
+  10%{opacity:1;}
+  100%{transform:translateY(-110vh);opacity:0;}
+}
+
+/* ===== Glass message card ===== */
+.message-box{
+  background:var(--glass);
+  backdrop-filter:blur(22px);
+  border-radius:30px;
+  padding:44px 40px;
+  max-width:820px;
+  width:92%;
+  box-shadow:
+    0 35px 80px rgba(0,0,0,.55),
+    inset 0 0 0 1px rgba(255,255,255,.08),
+    inset 0 0 30px rgba(255,255,255,.05);
+  animation:cardReveal 1.2s ease forwards;
+}
+
+@keyframes cardReveal{
+  from{opacity:0;transform:scale(.96) translateY(18px);}
+  to{opacity:1;transform:scale(1);}
+}
+
+.message-text{
+  font-size:1.55rem;
+  line-height:1.75;
+  color:#f5f5f7;
+}
+
+/* ===== Typewriter cursor ===== */
+.cursor{
+  display:inline-block;
+  width:2px;
+  height:1.2em;
+  background:#fff;
+  margin-left:6px;
+  animation:blink 1s infinite;
+}
+
+@keyframes blink{
+  50%{opacity:0;}
+}
+
+/* ===== Darken after YES ===== */
+.dark-bg{
+  background:linear-gradient(135deg,var(--dark1),var(--dark2)) !important;
+}
+
+/* ===== Reduce motion respect ===== */
+@media (prefers-reduced-motion:reduce){
+  *{animation:none !important;transition:none !important;}
+}
 </style>
 </head>
 
 <body>
 
 <div class="container">
-    <h1>Megh 💕</h1>
-    <div class="heart">❤️</div>
-    <p>Will you be my Valentine?</p>
-
-    <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
-    <button id="noBtn" onmouseover="teleportNo()" onclick="teleportNo()">No 🙈</button>
+  <h1>Megh 💕</h1>
+  <div class="heart">❤️</div>
+  <p>Will you be my Valentine?</p>
+  <button id="yesBtn" onclick="yesClicked()">Yes 💖</button>
+  <button id="noBtn" onmouseover="teleportNo()">No 🙈</button>
 </div>
 
 <script>
-    const noBtn = document.getElementById("noBtn");
+/* ===== Orientation lock (best effort) ===== */
+if (screen.orientation && screen.orientation.lock) {
+  try { screen.orientation.lock("portrait"); } catch(e){}
+}
 
-    function teleportNo() {
-        noBtn.style.animationName = "teleportOut";
+const noBtn=document.getElementById("noBtn");
 
-        setTimeout(() => {
-            const x = Math.random() * (window.innerWidth - noBtn.offsetWidth);
-            const y = Math.random() * (window.innerHeight - noBtn.offsetHeight);
+/* ===== Teleport logic ===== */
+function teleportNo(){
+  noBtn.style.animation="teleportOut .35s";
+  setTimeout(()=>{
+    noBtn.style.left=Math.random()*(innerWidth-noBtn.offsetWidth)+"px";
+    noBtn.style.top=Math.random()*(innerHeight-noBtn.offsetHeight)+"px";
+    noBtn.style.animation="teleportIn .35s";
+  },350);
+}
 
-            noBtn.style.left = x + "px";
-            noBtn.style.top = y + "px";
+/* ===== YES click ===== */
+function yesClicked(){
+  document.body.classList.add("dark-bg");
 
-            noBtn.style.animationName = "teleportIn";
-        }, 350);
-    }
+  document.body.innerHTML=`
+    <div style="
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      padding:env(safe-area-inset-top)
+              env(safe-area-inset-right)
+              env(safe-area-inset-bottom)
+              env(safe-area-inset-left);
+      z-index:3;">
+      <div class="message-box" id="box">
+        <p id="typeText" class="message-text"></p>
+        <span class="cursor"></span>
+      </div>
+    </div>`;
 
-    function yesClicked() {
-        document.body.innerHTML = `
-            <div style="
-                height:100vh;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                background:linear-gradient(135deg,#ffafbd,#ffc3a0);
-                color:white;
-                text-align:center;
-                padding:20px;
-            ">
-                <div style="max-width:750px;">
-                    <p id="typeText" style="font-size:1.5rem; line-height:1.7;"></p>
-                    <span class="cursor"></span>
-                </div>
-            </div>
-        `;
-
-        const text =
+  const text=
 `Then you do wish to be my valentines huh?
 Guess you couldnt click no.
 Hmm I didnt do anything tho but yay.
 
 I love you baby🌸❤️🫀`;
 
-        let index = 0;
-        const speed = 35; // soft but fast typing
+  let i=0;
+  const speed=35;
 
-        function typeWriter() {
-            if (index < text.length) {
-                document.getElementById("typeText").innerHTML +=
-                    text[index] === "\\n" ? "<br>" : text[index];
-                index++;
-                setTimeout(typeWriter, speed);
-            }
-        }
-
-        typeWriter();
+  function type(){
+    if(i<text.length){
+      const el=document.getElementById("typeText");
+      el.innerHTML+=text[i]==="\n"?"<br>":text[i];
+      el.scrollIntoView({behavior:"smooth",block:"center"});
+      i++;
+      setTimeout(type,speed);
     }
+  }
+  type();
+}
 
-    function createHeart() {
-        const heart = document.createElement("div");
-        heart.classList.add("floating-heart");
-        heart.innerHTML = "❤";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.animationDuration = (4 + Math.random() * 4) + "s";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 8000);
-    }
-
-    setInterval(createHeart, 400);
+/* ===== Floating hearts ===== */
+function createHeart(){
+  const h=document.createElement("div");
+  h.className="floating-heart";
+  h.innerHTML="❤";
+  h.style.left=Math.random()*100+"vw";
+  h.style.animationDuration=4+Math.random()*4+"s";
+  document.body.appendChild(h);
+  setTimeout(()=>h.remove(),8000);
+}
+setInterval(createHeart,420);
 </script>
 
 </body>
-</html>
+</html>    
