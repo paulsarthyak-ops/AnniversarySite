@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Will You Be My Valentine? 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Playfair+Display:ital@0;1&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe5f0 50%, #ffd6e8 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3em;
+            color: #c94b6e;
+            margin: 40px 0 20px;
+            animation: fadeInDown 1s ease-out;
+            text-shadow: 2px 2px 4px rgba(201, 75, 110, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2em;
+            color: #8b3a52;
+            margin-bottom: 50px;
+            animation: fadeIn 2s ease-out;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 30px;
+        }
+        
+        .valentine-btn {
+            background: linear-gradient(135deg, #ff6b9d 0%, #c94b6e 100%);
+            color: white;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.3em;
+            font-family: 'Dancing Script', cursive;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(201, 75, 110, 0.4);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            animation: bounceIn 1s ease-out;
+        }
+        
+        .valentine-btn:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+        
+        .valentine-btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .valentine-btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .valentine-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(201, 75, 110, 0.6);
+        }
+        
+        .valentine-btn span {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, #8b6f47 0%, #a0826b 100%);
+            color: #fff8f0;
+            padding: 30px;
+            border-radius: 20px;
+            margin: 30px 0 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            display: none;
+            animation: slideDown 0.5s ease-out;
+            text-align: left;
+        }
+        
+        .message-box.show {
+            display: block;
+        }
+        
+        .message-box p {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: 1.1em;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .typewriter-text {
+            display: inline;
+            border-right: 2px solid #fff8f0;
+            animation: blink 0.7s step-end infinite;
+        }
+        
+        .heart {
+            position: fixed;
+            font-size: 30px;
+            animation: float-up 4s ease-in infinite;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float-up {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-1000px) rotate(360deg);
+            }
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #fff8f0; }
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 2.2em;
+                margin: 30px 0 15px;
+            }
+            
+            .subtitle {
+                font-size: 1em;
+                margin-bottom: 30px;
+            }
+            
+            .valentine-btn {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            
+            .message-box {
+                padding: 20px;
+                margin: 20px 0 15px;
+            }
+            
+            .message-box p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="main-title">Will You Be My Valentine? 💕</h1>
+        <p class="subtitle">Click the buttons below to read my messages for you ✨</p>
+        
+        <div class="buttons-container">
+            <button class="valentine-btn" onclick="showMessage('apology')">
+                <span>💌 Apology Letter</span>
+            </button>
+            
+            <button class="valentine-btn" onclick="showMessage('memories')">
+                <span>🌸 A Little Piece of Us</span>
+            </button>
+        </div>
+        
+        <div id="apology-box" class="message-box">
+            <p id="apology-text"></p>
+        </div>
+        
+        <div id="memories-box" class="message-box">
+            <p id="memories-text"></p>
+        </div>
+    </div>
+
+    <script>
+        const apologyMessage = "I am sorry for today my love, I know that today is Valentine's Day and I couldn't be there with you the whole day. But who needs a valentine's day when I can love you and appreciate you every single day. You are my living inspiration, my best friend, my partner in crime. I am so sorry baby❤️🫀";
+        
+        const memoriesMessage = "So I think I might have forgotten how to code in HTML. So sadly I cannot add our pictures to my website (yet) but I soon will learn it again and I will improve the website. I love you my dearest valentine, my love of my life, my everything. Thank you for these beautiful memories which started on 24th of March, 2025. A beautiful day for me indeed, coming home from a football match, listening to your voice saying I love you?! Oh man that was all I needed🫀❤️. I love you my megh, my world❤️🫀🌸";
+        
+        let currentMessage = null;
+        
+        function typeWriter(element, text, speed = 30) {
+            let i = 0;
+            element.innerHTML = '<span class="typewriter-text"></span>';
+            const textSpan = element.querySelector('.typewriter-text');
+            
+            function type() {
+                if (i < text.length) {
+                    textSpan.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    textSpan.style.borderRight = 'none';
+                }
+            }
+            type();
+        }
+        
+        function showMessage(type) {
+            const apologyBox = document.getElementById('apology-box');
+            const memoriesBox = document.getElementById('memories-box');
+            const apologyText = document.getElementById('apology-text');
+            const memoriesText = document.getElementById('memories-text');
+            
+            if (type === 'apology') {
+                if (currentMessage === 'apology') {
+                    apologyBox.classList.remove('show');
+                    currentMessage = null;
+                } else {
+                    memoriesBox.classList.remove('show');
+                    apologyBox.classList.add('show');
+                    apologyText.textContent = '';
+                    typeWriter(apologyText, apologyMessage);
+                    currentMessage = 'apology';
+                }
+            } else {
+                if (currentMessage === 'memories') {
+                    memoriesBox.classList.remove('show');
+                    currentMessage = null;
+                } else {
+                    apologyBox.classList.remove('show');
+                    memoriesBox.classList.add('show');
+                    memoriesText.textContent = '';
+                    typeWriter(memoriesText, memoriesMessage);
+                    currentMessage = 'memories';
+                }
+            }
+        }
+        
+        // Create floating hearts
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = ['❤️', '💕', '💖', '💗', '💓', '💝'][Math.floor(Math.random() * 6)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 4000);
+        }
+        
+        // Create hearts periodically
+        setInterval(createHeart, 500);
+        
+        // Create initial hearts
+        for (let i = 0; i < 5; i++) {
+            setTimeout(createHeart, i * 300);
+        }
+    </script>
+</body>
+</html>
