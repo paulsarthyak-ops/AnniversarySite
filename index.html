@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Will You Be My Valentine? 💕</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Crimson+Text:ital@0;1&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Crimson Text', serif;
+            background: linear-gradient(135deg, #fff0f5 0%, #ffe4ec 25%, #ffd6e0 50%, #ffc9d6 75%, #ffb6c1 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        
+        .hearts-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            padding: 25px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+        
+        .main-title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 3.5em;
+            color: #d14d72;
+            margin: 50px 0 15px;
+            animation: fadeInScale 1.2s ease-out;
+            text-shadow: 3px 3px 6px rgba(209, 77, 114, 0.25);
+        }
+        
+        .subtitle {
+            font-size: 1.3em;
+            color: #a0405f;
+            margin-bottom: 60px;
+            animation: fadeIn 1.8s ease-out;
+            font-style: italic;
+        }
+        
+        .buttons-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .valentine-btn {
+            background: linear-gradient(135deg, #ff758c 0%, #ff7eb3 50%, #d14d72 100%);
+            color: white;
+            border: none;
+            padding: 20px 50px;
+            font-size: 1.4em;
+            font-family: 'Great Vibes', cursive;
+            border-radius: 60px;
+            cursor: pointer;
+            box-shadow: 0 10px 25px rgba(209, 77, 114, 0.35);
+            transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            position: relative;
+            overflow: hidden;
+            animation: popIn 0.8s ease-out;
+            transform-origin: center;
+        }
+        
+        .valentine-btn:nth-child(2) {
+            animation-delay: 0.3s;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        
+        .valentine-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+            transform: translate(-50%, -50%);
+            transition: width 0.7s ease, height 0.7s ease;
+        }
+        
+        .valentine-btn:hover::after {
+            width: 400px;
+            height: 400px;
+        }
+        
+        .valentine-btn:hover {
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(209, 77, 114, 0.5);
+        }
+        
+        .valentine-btn:active {
+            transform: translateY(-3px) scale(0.98);
+        }
+        
+        .valentine-btn span {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .message-box {
+            background: linear-gradient(135deg, #8b7355 0%, #a0826b 50%, #8b6f47 100%);
+            color: #fff5eb;
+            padding: 35px;
+            border-radius: 25px;
+            margin: 35px 0 25px;
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.35);
+            display: none;
+            animation: slideIn 0.6s ease-out;
+            text-align: left;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .message-box.show {
+            display: block;
+        }
+        
+        .message-box p {
+            font-family: 'Crimson Text', serif;
+            font-style: italic;
+            font-size: 1.15em;
+            line-height: 1.8;
+            margin: 0;
+        }
+        
+        .typewriter-text {
+            display: inline;
+            border-right: 3px solid #fff5eb;
+            animation: blink 0.8s step-end infinite;
+        }
+        
+        .floating-heart {
+            position: absolute;
+            font-size: 25px;
+            opacity: 0.3;
+            animation: floatRandom 8s ease-in-out infinite;
+            pointer-events: none;
+            will-change: transform, opacity;
+        }
+        
+        /* Music Controls */
+        .music-controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+        
+        .music-btn {
+            background: linear-gradient(135deg, #ff758c 0%, #d14d72 100%);
+            color: white;
+            border: none;
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            font-size: 1.4em;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(209, 77, 114, 0.4);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .music-btn:hover {
+            transform: scale(1.15);
+            box-shadow: 0 10px 30px rgba(209, 77, 114, 0.6);
+        }
+        
+        .music-btn:active {
+            transform: scale(0.95);
+        }
+        
+        /* Hide YouTube player completely */
+        #youtube-player {
+            position: fixed;
+            top: -9999px;
+            left: -9999px;
+            width: 1px;
+            height: 1px;
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.8);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-10deg);
+            }
+            60% {
+                transform: scale(1.1) rotate(5deg);
+            }
+            80% {
+                transform: scale(0.95) rotate(-2deg);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        @keyframes floatRandom {
+            0%, 100% {
+                transform: translate(0, 0) rotate(0deg) scale(1);
+                opacity: 0.2;
+            }
+            25% {
+                transform: translate(30px, -50px) rotate(90deg) scale(1.2);
+                opacity: 0.4;
+            }
+            50% {
+                transform: translate(-20px, -100px) rotate(180deg) scale(0.8);
+                opacity: 0.3;
+            }
+            75% {
+                transform: translate(40px, -150px) rotate(270deg) scale(1.1);
+                opacity: 0.35;
+            }
+        }
+        
+        @keyframes blink {
+            from, to { border-color: transparent; }
+            50% { border-color: #fff5eb; }
+        }
+        
+        @media (max-width: 600px) {
+            .main-title {
+                font-size: 2.5em;
+                margin: 35px 0 12px;
+            }
+            
+            .subtitle {
+                font-size: 1.1em;
+                margin-bottom: 40px;
+            }
+            
+            .valentine-btn {
+                padding: 16px 35px;
+                font-size: 1.2em;
+            }
+            
+            .message-box {
+                padding: 25px;
+                margin: 25px 0 18px;
+            }
+            
+            .message-box p {
+                font-size: 1.05em;
+                line-height: 1.7;
+            }
+            
+            .music-controls {
+                bottom: 20px;
+                right: 20px;
+                gap: 12px;
+            }
+            
+            .music-btn {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts-background" id="heartsContainer"></div>
+    
+    <div class="container">
+        <h1 class="main-title">Will You Be My Valentine? 💕</h1>
+        <p class="subtitle">Click the buttons below to read my heartfelt messages ✨</p>
+        
+        <div class="buttons-container">
+            <button class="valentine-btn" onclick="showMessage('apology')">
+                <span>💌 Apology Letter</span>
+            </button>
+            
+            <button class="valentine-btn" onclick="showMessage('memories')">
+                <span>🌸 A Little Piece of Us</span>
+            </button>
+        </div>
+        
+        <div id="apology-box" class="message-box">
+            <p id="apology-text"></p>
+        </div>
+        
+        <div id="memories-box" class="message-box">
+            <p id="memories-text"></p>
+        </div>
+    </div>
+
+    <!-- Hidden YouTube Player -->
+    <div id="youtube-player"></div>
+
+    <!-- Music Controls -->
+    <div class="music-controls">
+        <button class="music-btn" id="playPauseBtn" onclick="togglePlayPause()">⏸️</button>
+        <button class="music-btn" id="muteBtn" onclick="toggleMute()">🔊</button>
+    </div>
+
+    <!-- Load YouTube IFrame API -->
+    <script src="https://www.youtube.com/iframe_api"></script>
+
+    <script>
+        const apologyMessage = "I am sorry for today my love, I know that today is Valentine's Day and I couldn't be there with you the whole day. But who needs a valentine's day when I can love you and appreciate you every single day. You are my living inspiration, my best friend, my partner in crime. I am so sorry baby❤️🫀";
+        
+        const memoriesMessage = "So I think I might have forgotten how to code in HTML. So sadly I cannot add our pictures to my website (yet) but I soon will learn it again and I will improve the website. I love you my dearest valentine, my love of my life, my everything. Thank you for these beautiful memories which started on 24th of March, 2025. A beautiful day for me indeed, coming home from a football match, listening to your voice saying I love you?! Oh man that was all I needed🫀❤️. I love you my megh, my world❤️🫀🌸";
+        
+        let currentMessage = null;
+        let player;
+        let isPlaying = true;
+        let isMuted = false;
+        
+        // YouTube video IDs - CORRECTED ORDER
+        const videos = {
+            background: 'AKnC-W-JPJk',   // Mann Mera - plays when website opens
+            apology: '-dg19xX4PIo',      // Country Roads - plays with Apology Letter
+            memories: 'uu7j_xljCRY'      // The Night We Met - plays with A Little Piece of Us
+        };
+        
+        // Initialize YouTube Player
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                height: '1',
+                width: '1',
+                videoId: videos.background,
+                playerVars: {
+                    'autoplay': 1,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'modestbranding': 1,
+                    'playsinline': 1,
+                    'rel': 0,
+                    'showinfo': 0,
+                    'iv_load_policy': 3,
+                    'loop': 1,
+                    'playlist': videos.background
+                },
+                events: {
+                    'onReady': onPlayerReady
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            event.target.playVideo();
+        }
+        
+        function changeVideo(videoId) {
+            if (player && player.loadVideoById) {
+                player.loadVideoById({
+                    'videoId': videoId,
+                    'startSeconds': 0
+                });
+                isPlaying = true;
+                document.getElementById('playPauseBtn').innerHTML = '⏸️';
+            }
+        }
+        
+        function togglePlayPause() {
+            if (player && player.getPlayerState) {
+                if (isPlaying) {
+                    player.pauseVideo();
+                    document.getElementById('playPauseBtn').innerHTML = '▶️';
+                    isPlaying = false;
+                } else {
+                    player.playVideo();
+                    document.getElementById('playPauseBtn').innerHTML = '⏸️';
+                    isPlaying = true;
+                }
+            }
+        }
+        
+        function toggleMute() {
+            if (player && player.isMuted) {
+                if (isMuted) {
+                    player.unMute();
+                    document.getElementById('muteBtn').innerHTML = '🔊';
+                    isMuted = false;
+                } else {
+                    player.mute();
+                    document.getElementById('muteBtn').innerHTML = '🔇';
+                    isMuted = true;
+                }
+            }
+        }
+        
+        function typeWriter(element, text, speed = 30) {
+            let i = 0;
+            element.innerHTML = '<span class="typewriter-text"></span>';
+            const textSpan = element.querySelector('.typewriter-text');
+            
+            function type() {
+                if (i < text.length) {
+                    textSpan.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                } else {
+                    textSpan.style.borderRight = 'none';
+                }
+            }
+            type();
+        }
+        
+        function showMessage(type) {
+            const apologyBox = document.getElementById('apology-box');
+            const memoriesBox = document.getElementById('memories-box');
+            const apologyText = document.getElementById('apology-text');
+            const memoriesText = document.getElementById('memories-text');
+            
+            if (type === 'apology') {
+                // Change to Country Roads
+                changeVideo(videos.apology);
+                
+                if (currentMessage === 'apology') {
+                    apologyBox.classList.remove('show');
+                    currentMessage = null;
+                } else {
+                    memoriesBox.classList.remove('show');
+                    apologyBox.classList.add('show');
+                    apologyText.textContent = '';
+                    typeWriter(apologyText, apologyMessage);
+                    currentMessage = 'apology';
+                }
+            } else {
+                // Change to The Night We Met
+                changeVideo(videos.memories);
+                
+                if (currentMessage === 'memories') {
+                    memoriesBox.classList.remove('show');
+                    currentMessage = null;
+                } else {
+                    apologyBox.classList.remove('show');
+                    memoriesBox.classList.add('show');
+                    memoriesText.textContent = '';
+                    typeWriter(memoriesText, memoriesMessage);
+                    currentMessage = 'memories';
+                }
+            }
+        }
+        
+        // Create floating hearts all over the screen
+        function createFloatingHeart() {
+            const heartsContainer = document.getElementById('heartsContainer');
+            const heart = document.createElement('div');
+            heart.classList.add('floating-heart');
+            
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💓', '💝', '💞', '💘'];
+            heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+            
+            // Random position anywhere on screen
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.top = Math.random() * 100 + 'vh';
+            
+            // Random animation duration
+            heart.style.animationDuration = (Math.random() * 6 + 5) + 's';
+            heart.style.animationDelay = Math.random() * 3 + 's';
+            
+            // Random size
+            heart.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            heartsContainer.appendChild(heart);
+        }
+        
+        // Create initial floating hearts
+        for (let i = 0; i < 25; i++) {
+            createFloatingHeart();
+        }
+        
+        // Add more hearts periodically
+        setInterval(() => {
+            createFloatingHeart();
+        }, 2000);
+    </script>
+</body>
+</html>
